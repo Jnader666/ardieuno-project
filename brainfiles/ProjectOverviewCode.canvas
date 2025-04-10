@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"1","type":"text","text":"# ILI9341 Command Structure\n\nThe ILI9341 uses a command-based protocol over SPI to control all aspects of the display.","x":0,"y":0,"width":400,"height":100},
+		{"id":"5","type":"text","text":"## Drawing Pixels\n\n1. Set column address (0x2A) with start/end X coordinates\n2. Set page address (0x2B) with start/end Y coordinates\n3. Send memory write command (0x2C)\n4. Send color data for each pixel (16-bit or 18-bit color format)","x":-1140,"y":550,"width":620,"height":210},
+		{"id":"2","type":"text","text":"## Command Format\n\n1. Pull CS (Chip Select) LOW to begin communication\n2. Set DC (Data/Command) pin LOW for commands, HIGH for data\n3. Send command byte over SPI\n4. Send any parameter bytes (with DC HIGH)\n5. Pull CS HIGH to end communication","x":-1140,"y":150,"width":660,"height":210},
+		{"id":"3","type":"text","text":"## Key Commands\n\n- 0x01: Software Reset\n- 0x11: Sleep Out\n- 0x29: Display ON\n- 0x2A: Column Address Set\n- 0x2B: Page Address Set\n- 0x2C: Memory Write\n- 0x36: Memory Access Control\n- 0x3A: Pixel Format Set","x":0,"y":150,"width":350,"height":310},
+		{"id":"6","type":"text","text":"## Code Implementation\n\n```cpp\n// Example of sending a command with parameters\nvoid writeCommand(uint8_t cmd) {\n  digitalWrite(DC_PIN, LOW);  // Command mode\n  digitalWrite(CS_PIN, LOW);  // Select display\n  SPI.transfer(cmd);         // Send command\n  digitalWrite(CS_PIN, HIGH); // Deselect display\n}\n\nvoid writeData(uint8_t data) {\n  digitalWrite(DC_PIN, HIGH); // Data mode\n  digitalWrite(CS_PIN, LOW);  // Select display\n  SPI.transfer(data);        // Send data\n  digitalWrite(CS_PIN, HIGH); // Deselect display\n}\n```","x":-170,"y":640,"width":740,"height":400},
+		{"id":"4","type":"text","text":"## Initialization Sequence\n\n1. Hardware reset (toggle RESET pin)\n2. Software reset (0x01)\n3. Power control settings\n4. Sleep out (0x11)\n5. Set pixel format (0x3A)\n6. Set memory access control (0x36)\n7. Display on (0x29)","x":900,"y":150,"width":350,"height":290},
+		{"id":"7","type":"text","text":"## Drawing Functions\n\n```cpp\n// Set drawing window\nvoid setAddrWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1) {\n  // Column address set\n  writeCommand(0x2A);\n  writeData(x0 >> 8);\n  writeData(x0 & 0xFF);\n  writeData(x1 >> 8);\n  writeData(x1 & 0xFF);\n  \n  // Page address set\n  writeCommand(0x2B);\n  writeData(y0 >> 8);\n  writeData(y0 & 0xFF);\n  writeData(y1 >> 8);\n  writeData(y1 & 0xFF);\n\n  // Memory write\n  writeCommand(0x2C);\n}\n```","x":900,"y":640,"width":800,"height":520}
+	],
+	"edges":[
+		{"id":"e1-2","fromNode":"1","fromSide":"left","toNode":"2","toSide":"top"},
+		{"id":"e1-3","fromNode":"1","fromSide":"bottom","toNode":"3","toSide":"top"},
+		{"id":"e1-4","fromNode":"1","fromSide":"right","toNode":"4","toSide":"top"},
+		{"id":"e2-5","fromNode":"2","fromSide":"bottom","toNode":"5","toSide":"top"},
+		{"id":"e3-6","fromNode":"3","fromSide":"bottom","toNode":"6","toSide":"top"},
+		{"id":"e4-7","fromNode":"4","fromSide":"bottom","toNode":"7","toSide":"top"}
+	]
+}

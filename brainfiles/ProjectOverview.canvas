@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"1","type":"text","text":"# ILI9341 TFT Display Controller\n\nA 240x320 pixel color TFT LCD display controller with integrated RAM and driver circuits.","x":0,"y":0,"width":400,"height":100},
+		{"id":"2","type":"text","text":"## Hardware Interface\n\n- SPI Communication\n- Requires 4-5 pins for basic operation\n- Optional touch interface","x":-540,"y":150,"width":440,"height":200},
+		{"id":"3","type":"text","text":"## Key Features\n\n- 262K color display\n- 240x320 resolution\n- Built-in graphics RAM\n- Hardware scrolling\n- Various display modes","x":-40,"y":150,"width":400,"height":230},
+		{"id":"4","type":"text","text":"## Arduino Connection\n\n- MOSI: Data from Arduino to display\n- MISO: Data from display to Arduino (rarely used)\n- SCK: Clock signal\n- CS: Chip select\n- DC: Data/Command selection\n- RESET: Hardware reset (optional)","x":400,"y":150,"width":460,"height":270},
+		{"id":"7","type":"text","text":"## Performance Considerations\n\n- SPI speed affects refresh rate\n- Use hardware SPI for best performance\n- Buffer updates for smoother animations\n- Consider memory limitations of Arduino","x":420,"y":500,"width":420,"height":280},
+		{"id":"6","type":"text","text":"## Software Libraries\n\n- Adafruit GFX (graphics primitives)\n- Adafruit ILI9341 (display driver)\n- Alternative: TFT_eSPI library","x":-20,"y":500,"width":360,"height":240},
+		{"id":"5","type":"text","text":"## Power Requirements\n\n- Logic level: 3.3V (may need level shifters with 5V Arduino)\n- VCC: 3.3V\n- Backlight: Usually 3.3V or 5V","x":-540,"y":460,"width":440,"height":280}
+	],
+	"edges":[
+		{"id":"e1-2","fromNode":"1","fromSide":"left","toNode":"2","toSide":"top"},
+		{"id":"e1-3","fromNode":"1","fromSide":"bottom","toNode":"3","toSide":"top"},
+		{"id":"e1-4","fromNode":"1","fromSide":"right","toNode":"4","toSide":"top"},
+		{"id":"e2-5","fromNode":"2","fromSide":"bottom","toNode":"5","toSide":"top"},
+		{"id":"e3-6","fromNode":"3","fromSide":"bottom","toNode":"6","toSide":"top"},
+		{"id":"e4-7","fromNode":"4","fromSide":"bottom","toNode":"7","toSide":"top"}
+	]
+}
